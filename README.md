@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mavina - Mobil Araç Yıkama Hizmetleri
 
-## Getting Started
+Mavina, kullanıcıların çevrelerindeki mobil araç yıkama hizmetlerini bulmalarına, iletişime geçmelerine ve randevu almalarına olanak tanıyan bir web uygulamasıdır.
 
-First, run the development server:
+## Özellikler
 
+- **Kullanıcı Türleri**: Araç sahipleri ve hizmet sağlayıcılar için ayrı paneller
+- **Harita Entegrasyonu**: Kullanıcının konumunu belirleyerek en yakın mobil araç yıkama servislerini gösterme
+- **Rezervasyon Sistemi**: Uygulama üzerinden doğrudan randevu alma ve onay mekanizması
+- **Hizmet Sağlayıcı Paneli**: Konum güncelleme, müsaitlik durumu yönetimi ve randevu takibi
+- **Kullanıcı Dostu Arayüz**: Sezgisel ve modern bir kullanıcı deneyimi
+
+## Teknolojiler
+
+- **Frontend**: Next.js, React, TailwindCSS
+- **Harita**: Leaflet
+- **Form Yönetimi**: React Hook Form, Zod
+- **Kimlik Doğrulama**: NextAuth.js
+- **HTTP İstekleri**: Axios
+
+## Kurulum
+
+1. Projeyi klonlayın:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/kullanici/mavina.git
+cd mavina
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Bağımlılıkları yükleyin:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Geliştirme sunucusunu başlatın:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-## Learn More
+## Kullanım
 
-To learn more about Next.js, take a look at the following resources:
+### Kullanıcılar (Araç Sahipleri) İçin
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Kayıt olun veya giriş yapın
+2. Harita üzerinden yakınınızdaki hizmet sağlayıcıları görüntüleyin
+3. Bir hizmet sağlayıcı seçin ve detaylarını inceleyin
+4. Size uygun bir hizmet ve zaman dilimi seçerek randevu oluşturun
+5. Randevularınızı ve geçmiş hizmetlerinizi panelinizdeki ilgili sekmelerden takip edin
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Hizmet Sağlayıcılar İçin
 
-## Deploy on Vercel
+1. Hizmet sağlayıcı olarak kayıt olun veya giriş yapın
+2. Konum bilgilerinizi ve hizmet yarıçapınızı güncelleyin
+3. Sunduğunuz hizmetleri ve fiyatları ekleyin/düzenleyin
+4. Gelen randevu taleplerini onaylayın veya reddedin
+5. Randevularınızı ve geçmiş hizmetlerinizi panelinizdeki ilgili sekmelerden takip edin
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Katkıda Bulunma
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Bu depoyu fork edin
+2. Yeni bir özellik dalı oluşturun (`git checkout -b yeni-ozellik`)
+3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik: Açıklama'`)
+4. Dalınıza push yapın (`git push origin yeni-ozellik`)
+5. Bir Pull Request oluşturun
+
+## Lisans
+
+Bu proje [MIT Lisansı](LICENSE) altında lisanslanmıştır.
+
+## İletişim
+
+Sorularınız veya önerileriniz için [info@mavina.com](mailto:info@mavina.com) adresine e-posta gönderebilirsiniz.
