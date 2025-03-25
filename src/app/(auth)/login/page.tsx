@@ -16,19 +16,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Kullanıcı zaten giriş yapmışsa, paneline yönlendir
-  useEffect(() => {
-    // Eğer kullanıcı yükleme tamamlandıysa ve kullanıcı varsa
-    if (!authLoading && user) {
-      console.log("Kullanıcı zaten giriş yapmış, yönlendiriliyor:", user.role);
-      if (user.role === "USER") {
-        router.push("/user");
-      } else if (user.role === "PROVIDER") {
-        router.push("/provider");
-      }
-    }
-  }, [user, authLoading, router]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -184,7 +171,8 @@ export default function LoginPage() {
               </p>
               <p className="text-xs text-blue-500 mt-1">
                 Kullanıcı: user@example.com<br />
-                Hizmet Sağlayıcı: provider@example.com<br />
+                Hizmet Sağlayıcı 1: provider@example.com<br />
+                Hizmet Sağlayıcı 2: yeni@provider.com<br />
                 (Şifre alanına herhangi bir şey yazabilirsiniz)
               </p>
             </div>

@@ -162,7 +162,7 @@ export default function KariyerPage() {
             </p>
             <div className="flex items-center justify-center mb-6">
               <FaEnvelope className="mr-2 text-2xl" />
-              <span className="text-2xl font-bold">kariyer@mavina.com</span>
+              <span className="text-2xl font-bold">kariyer@mavina.tr</span>
             </div>
           </AnimatedSection>
         </div>

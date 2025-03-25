@@ -70,4 +70,4 @@ Bu proje [MIT Lisansı](LICENSE) altında lisanslanmıştır.
 
 ## İletişim
 
-Sorularınız veya önerileriniz için [info@mavina.com](mailto:info@mavina.com) adresine e-posta gönderebilirsiniz.
+Sorularınız veya önerileriniz için [info@mavina.tr](mailto:info@mavina.tr) adresine e-posta gönderebilirsiniz.

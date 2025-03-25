@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { FaUser, FaEnvelope, FaLock, FaPhone, FaMapMarkerAlt, FaUserTie } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaPhone, FaMapMarkerAlt, FaUserTie, FaCheck } from "react-icons/fa";
 import { UserRole } from "@/types";
 import { useAuth } from "@/lib/auth-context";
 
@@ -23,19 +23,10 @@ export default function RegisterPage() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
-  // Kullanıcı zaten giriş yapmışsa, paneline yönlendir
-  useEffect(() => {
-    // Eğer kullanıcı yükleme tamamlandıysa ve kullanıcı varsa
-    if (!authLoading && user) {
-      console.log("Kullanıcı zaten giriş yapmış, yönlendiriliyor:", user.role);
-      if (user.role === "USER") {
-        router.push("/user");
-      } else if (user.role === "PROVIDER") {
-        router.push("/provider");
-      }
-    }
-  }, [user, authLoading, router]);
+  const [verificationStep, setVerificationStep] = useState<'phone' | 'code' | 'complete'>('phone');
+  const [verificationCode, setVerificationCode] = useState("");
+  const [countdown, setCountdown] = useState(0);
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false);
   
   useEffect(() => {
     const roleParam = searchParams.get("role");
@@ -46,6 +37,50 @@ export default function RegisterPage() {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (countdown > 0) {
+      timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [countdown]);
+
+  const handleSendVerificationCode = async () => {
+    if (!phone) {
+      setError("Lütfen telefon numaranızı girin.");
+      return;
+    }
+
+    try {
+      // Burada SMS gönderme API'si çağrılacak
+      // Örnek: await sendSMS(phone);
+      setCountdown(60);
+      setVerificationStep('code');
+      setError("");
+    } catch (err) {
+      setError("Doğrulama kodu gönderilirken bir hata oluştu.");
+    }
+  };
+
+  const handleVerifyCode = async () => {
+    if (!verificationCode) {
+      setError("Lütfen doğrulama kodunu girin.");
+      return;
+    }
+
+    try {
+      // Burada doğrulama kodu kontrolü yapılacak
+      // Örnek: await verifyCode(phone, verificationCode);
+      setIsPhoneVerified(true);
+      setVerificationStep('complete');
+      setError("");
+    } catch (err) {
+      setError("Geçersiz doğrulama kodu.");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -53,6 +88,12 @@ export default function RegisterPage() {
 
     if (!name || !email || !password) {
       setError("Lütfen gerekli alanları doldurun.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!isPhoneVerified) {
+      setError("Lütfen telefon numaranızı doğrulayın.");
       setIsLoading(false);
       return;
     }
@@ -75,7 +116,6 @@ export default function RegisterPage() {
       const success = await register(userData, password);
       
       if (success) {
-        // Başarılı kayıt, kullanıcı rolüne göre yönlendir
         if (role === "USER") {
           router.push("/user");
         } else {
@@ -92,7 +132,6 @@ export default function RegisterPage() {
     setIsLoading(false);
   };
 
-  // Eğer kullanıcı yükleniyor veya zaten giriş yapmışsa, yükleniyor göster
   if (authLoading) {
     return (
       <div className="flex flex-col min-h-screen">
@@ -239,13 +278,45 @@ export default function RegisterPage() {
                     name="phone"
                     type="tel"
                     autoComplete="tel"
+                    required
                     className="appearance-none rounded-md relative block w-full pl-10 pr-3 py-2 border border-black placeholder-blue-500 text-blue-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                    placeholder="Telefon Numarası"
+                    placeholder="Telefon Numarası (Örn: 5XX XXX XX XX)"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
+                    disabled={verificationStep !== 'phone'}
                   />
+                  {isPhoneVerified && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                      <FaCheck className="h-5 w-5 text-green-500" />
+                    </div>
+                  )}
                 </div>
               </div>
+              
+              {verificationStep === 'code' && (
+                <div>
+                  <label htmlFor="verification-code" className="sr-only">
+                    Doğrulama Kodu
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="verification-code"
+                      name="verification-code"
+                      type="text"
+                      required
+                      className="appearance-none rounded-md relative block w-full px-3 py-2 border border-black placeholder-blue-500 text-blue-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                      placeholder="Doğrulama Kodu"
+                      value={verificationCode}
+                      onChange={(e) => setVerificationCode(e.target.value)}
+                    />
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                      <span className="text-sm text-gray-500">
+                        {countdown > 0 ? `${countdown} saniye` : "Yeniden Gönder"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
               
               {role === "PROVIDER" && (
                 <div>
@@ -295,10 +366,30 @@ export default function RegisterPage() {
               </label>
             </div>
 
-            <div>
+            <div className="space-y-4">
+              {verificationStep === 'phone' && (
+                <button
+                  type="button"
+                  onClick={handleSendVerificationCode}
+                  className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Doğrulama Kodu Gönder
+                </button>
+              )}
+
+              {verificationStep === 'code' && (
+                <button
+                  type="button"
+                  onClick={handleVerifyCode}
+                  className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Kodu Doğrula
+                </button>
+              )}
+
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || !isPhoneVerified}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-400"
               >
                 {isLoading ? "Kayıt Yapılıyor..." : "Kayıt Ol"}

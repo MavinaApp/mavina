@@ -76,6 +76,19 @@ export default function ProviderProfilePage() {
     currentlyWorking: true
   });
   
+  const [appointments, setAppointments] = useState([
+    {
+      id: 1,
+      serviceName: "Mobil Yıkama Servisi 1",
+      date: new Date(),
+      address: "Örnek Mahallesi, Örnek Sokak No:1, İstanbul",
+      service: "Detaylı Yıkama",
+      price: 250,
+      status: "Onaylandı"
+    },
+    // ...
+  ]);
+  
   // Türkçe gün isimleri
   const dayNames: Record<string, string> = {
     monday: "Pazartesi",
@@ -96,6 +109,16 @@ export default function ProviderProfilePage() {
   // Animasyonlar için görünürlük kontrolü
   const [titleRef, titleInView] = useInView({ triggerOnce: false, threshold: 0.1 });
   const [contentRef, contentInView] = useInView({ triggerOnce: false, threshold: 0.1 });
+  
+  const handleCancelAppointment = (id: number) => {
+    if (window.confirm("Randevuyu iptal etmek istediğinizden emin misiniz?")) {
+      setAppointments(appointments.map(appointment => 
+        appointment.id === id 
+          ? {...appointment, status: "İptal Edildi"} 
+          : appointment
+      ));
+    }
+  };
   
   return (
     <div className="flex flex-col min-h-screen">

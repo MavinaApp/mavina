@@ -42,4 +42,19 @@ export interface Review {
   comment: string;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export type TransactionStatus = "PENDING" | "COMPLETED" | "DISPUTED";
+export type PaymentStatus = "PENDING" | "CONFIRMED" | "DISPUTED";
+
+export interface Transaction {
+  id: string;
+  appointmentId: string;
+  customerId: string;
+  washerId: string;
+  serviceStatus: TransactionStatus;
+  paymentStatus: PaymentStatus;
+  timestamp: string;
+  amount: number;
+  serviceName: string;
 } 

@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { FaCar, FaMapMarkerAlt, FaCalendarAlt, FaArrowRight, FaCheck, FaShieldAlt, FaMobileAlt, FaUserFriends, FaCookieBite, FaTimes } from "react-icons/fa";
+import { FaCar, FaMapMarkerAlt, FaCalendarAlt, FaArrowRight, FaCheck, FaShieldAlt, FaMobileAlt, FaUserFriends, FaCookieBite, FaTimes, FaUser, FaMoneyBillWave, FaStar, FaClock } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ReactNode, useState, useEffect } from "react";
 import Image from "next/image";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 // Animasyon varyantları
 const fadeIn = {
@@ -135,63 +137,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-blue-600">
-      {/* Header */}
-      <motion.header 
-        className="bg-blue-700 shadow-sm sticky top-0 z-50"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <motion.h1 
-              className="text-2xl font-bold text-white"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Mavina
-            </motion.h1>
-          </div>
-          <div className="hidden md:flex items-center space-x-8">
-            <motion.div whileHover={{ y: -2 }}>
-              <Link href="#features" className="text-white hover:text-blue-200">Özellikler</Link>
-            </motion.div>
-            <motion.div whileHover={{ y: -2 }}>
-              <Link href="#how-it-works" className="text-white hover:text-blue-200">Nasıl Çalışır</Link>
-            </motion.div>
-            <motion.div whileHover={{ y: -2 }}>
-              <Link href="#testimonials" className="text-white hover:text-blue-200">Yorumlar</Link>
-            </motion.div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link 
-                href="/login" 
-                className="px-4 py-2 text-white hover:text-blue-200 font-medium"
-              >
-                Giriş Yap
-              </Link>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link 
-                href="/register" 
-                className="px-4 py-2 bg-white text-blue-700 rounded-full hover:bg-blue-100 font-medium"
-              >
-                Kayıt Ol
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </motion.header>
-
+    <main className="min-h-screen">
+      <Header />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
@@ -216,14 +164,11 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={fadeIn}
-              className="flex flex-col sm:flex-row justify-center gap-4"
+              className="flex justify-center"
             >
-              <Link href="/become-provider" className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 inline-flex items-center">
-                Hizmet Sağlayıcı Ol
+              <Link href="/register" className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 inline-flex items-center">
+                Hemen Katılın
                 <FaArrowRight className="ml-2" />
-              </Link>
-              <Link href="/register" className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300">
-                Müşteri Olarak Katıl
               </Link>
             </motion.div>
           </div>
@@ -250,7 +195,9 @@ export default function Home() {
               </button>
               <button 
                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === "provider" ? "bg-blue-600 shadow-md text-white" : "text-gray-500 hover:text-gray-700"}`}
-                onClick={() => setActiveTab("provider")}
+                onClick={() => {
+                  setActiveTab("provider");
+                }}
               >
                 Hizmet Sağlayıcılar
               </button>
@@ -491,6 +438,174 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Kariyer Bölümü */}
+      <section id="career" className="py-16 bg-gradient-to-b from-white to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
+              Mobil Oto Yıkama Kariyeri
+            </h2>
+
+            {/* Kolay Başlangıç */}
+            <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+              <h3 className="text-2xl font-semibold text-blue-600 mb-4">
+                Kolay Başlangıç ve Yüksek Kazanç
+              </h3>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Mobil oto yıkama sektörü, düşük başlangıç maliyeti ve yüksek kazanç potansiyeli ile 
+                girişimciler için mükemmel bir fırsat sunuyor. Temel ekipmanlar ve bir araç ile 
+                hemen işe başlayabilir, kendi işinizin patronu olabilirsiniz.
+              </p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="flex items-start">
+                  <div className="bg-blue-100 rounded-full p-2 mr-4 flex-shrink-0">
+                    <FaCheck className="text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800">Düşük Yatırım</h4>
+                    <p className="text-gray-600">Minimum ekipman ile başlangıç yapabilirsiniz</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-blue-100 rounded-full p-2 mr-4 flex-shrink-0">
+                    <FaCheck className="text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800">Hızlı Başlangıç</h4>
+                    <p className="text-gray-600">Basit bir süreçle hemen işe başlayın</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sektör Avantajları */}
+            <div className="bg-blue-600 text-white rounded-lg shadow-lg p-8 mb-8">
+              <h3 className="text-2xl font-semibold mb-6">
+                Büyüyen Sektörde Sınırsız Fırsatlar
+              </h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <FaCheck className="text-white mt-1 mr-3" />
+                    <p>Yüksek talep ve sürekli artan müşteri potansiyeli</p>
+                  </div>
+                  <div className="flex items-start">
+                    <FaCheck className="text-white mt-1 mr-3" />
+                    <p>Sektörde kalifiye eleman açığı</p>
+                  </div>
+                  <div className="flex items-start">
+                    <FaCheck className="text-white mt-1 mr-3" />
+                    <p>Esnek çalışma saatleri</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <FaCheck className="text-white mt-1 mr-3" />
+                    <p>Artan araç sayısı ile büyüyen pazar</p>
+                  </div>
+                  <div className="flex items-start">
+                    <FaCheck className="text-white mt-1 mr-3" />
+                    <p>Yüksek müşteri memnuniyeti potansiyeli</p>
+                  </div>
+                  <div className="flex items-start">
+                    <FaCheck className="text-white mt-1 mr-3" />
+                    <p>Düzenli ve sürdürülebilir gelir</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mavina Avantajları */}
+            <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+              <h3 className="text-2xl font-semibold text-blue-600 mb-6">
+                Mavina ile Başarıya Ulaşın
+              </h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center p-4">
+                  <div className="bg-blue-100 rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center">
+                    <FaUser className="text-blue-600 text-2xl" />
+                  </div>
+                  <h4 className="font-medium text-gray-800 mb-2">Kolay Müşteri Bulma</h4>
+                  <p className="text-gray-600">Mavina'nın geniş müşteri ağından yararlanın</p>
+                </div>
+                <div className="text-center p-4">
+                  <div className="bg-blue-100 rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center">
+                    <FaCalendarAlt className="text-blue-600 text-2xl" />
+                  </div>
+                  <h4 className="font-medium text-gray-800 mb-2">Randevu Yönetimi</h4>
+                  <p className="text-gray-600">Otomatik randevu sistemi ile işinizi kolaylaştırın</p>
+                </div>
+                <div className="text-center p-4">
+                  <div className="bg-blue-100 rounded-full p-4 mx-auto mb-4 w-16 h-16 flex items-center justify-center">
+                    <FaMoneyBillWave className="text-blue-600 text-2xl" />
+                  </div>
+                  <h4 className="font-medium text-gray-800 mb-2">Güvenli Ödeme</h4>
+                  <p className="text-gray-600">Güvenli ve düzenli ödeme sistemi</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Başarı İpuçları */}
+            <div className="bg-gradient-to-r from-blue-50 to-white rounded-lg shadow-lg p-8 mb-8">
+              <h3 className="text-2xl font-semibold text-blue-600 mb-6">
+                Başarılı Hizmet İpuçları
+              </h3>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="bg-blue-100 rounded-full p-3 mr-4 flex-shrink-0">
+                    <FaStar className="text-blue-600 text-xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-2">Kaliteli Hizmet</h4>
+                    <p className="text-gray-600">
+                      Her araça özel dikkat gösterin, detaylara önem verin ve müşteri memnuniyetini 
+                      her zaman ön planda tutun.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-blue-100 rounded-full p-3 mr-4 flex-shrink-0">
+                    <FaClock className="text-blue-600 text-xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-2">Profesyonel Yaklaşım</h4>
+                    <p className="text-gray-600">
+                      Randevulara zamanında gidin, işinizi söz verdiğiniz sürede tamamlayın ve 
+                      profesyonel bir hizmet sunun.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-blue-100 rounded-full p-3 mr-4 flex-shrink-0">
+                    <FaUser className="text-blue-600 text-xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-2">Müşteri İlişkileri</h4>
+                    <p className="text-gray-600">
+                      Nazik ve profesyonel iletişim kurun, müşteri geri bildirimlerini dikkate alın 
+                      ve sürekli kendinizi geliştirin.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                Kendi İşinizin Patronu Olun!
+              </h3>
+              <p className="text-lg text-gray-600 mb-8">
+                Mobil oto yıkama sektöründe başarılı bir kariyere Mavina ile başlayın.
+              </p>
+              <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">
+                Hemen Başvur
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
@@ -519,64 +634,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-blue-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <motion.h2 
-                className="text-2xl font-bold text-white mb-4"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                Mavina
-              </motion.h2>
-              <motion.p 
-                className="text-blue-200 mb-4"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                Mobil Araç Yıkama Hizmetleri
-              </motion.p>
-              <p className="text-blue-300 text-sm">
-                &copy; {new Date().getFullYear()} Mavina. <br />Tüm hakları saklıdır.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Hizmetler</h3>
-              <ul className="space-y-2">
-                <li><Link href="#" className="text-blue-200 hover:text-white transition-colors">Araç Yıkama</Link></li>
-                <li><Link href="#" className="text-blue-200 hover:text-white transition-colors">İç Temizlik</Link></li>
-                <li><Link href="#" className="text-blue-200 hover:text-white transition-colors">Detaylı Temizlik</Link></li>
-                <li><Link href="#" className="text-blue-200 hover:text-white transition-colors">Cilalama</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Şirket</h3>
-              <ul className="space-y-2">
-                <li><Link href="/about" className="text-blue-200 hover:text-white transition-colors">Hakkımızda</Link></li>
-                <li><Link href="/kariyer" className="text-blue-200 hover:text-white transition-colors">Kariyer</Link></li>
-                <li><Link href="/blog" className="text-blue-200 hover:text-white transition-colors">Blog</Link></li>
-                <li><Link href="/contact" className="text-blue-200 hover:text-white transition-colors">İletişim</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Yasal</h3>
-              <ul className="space-y-2">
-                <li><Link href="/privacy" className="text-blue-200 hover:text-white transition-colors">Gizlilik Politikası</Link></li>
-                <li><Link href="/terms" className="text-blue-200 hover:text-white transition-colors">Kullanım Şartları</Link></li>
-                <li><Link href="/cookies" className="text-blue-200 hover:text-white transition-colors">Çerez Politikası</Link></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Çerez Bildirimi */}
       <AnimatePresence>
@@ -622,6 +680,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 } 

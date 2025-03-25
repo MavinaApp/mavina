@@ -67,7 +67,7 @@ export default function TermsOfServicePage() {
             <p className="text-black">Mavina, bu Şartları zaman zaman güncelleyebilir. Değişiklikler, Uygulama üzerinden duyurulacaktır. Değişikliklerden sonra Uygulamayı kullanmaya devam etmeniz, güncellenmiş Şartları kabul ettiğiniz anlamına gelir.</p>
             
             <h2 className="text-2xl font-semibold text-blue-800 mt-8 mb-4">13. İletişim</h2>
-            <p className="text-black">Bu Kullanım Şartları hakkında sorularınız varsa, lütfen <a href="mailto:info@mavina.com" className="text-blue-600 hover:text-blue-500">info@mavina.com</a> adresinden bizimle iletişime geçin.</p>
+            <p className="text-black">Bu Kullanım Şartları hakkında sorularınız varsa, lütfen <a href="mailto:info@mavina.tr" className="text-blue-600 hover:text-blue-500">info@mavina.tr</a> adresinden bizimle iletişime geçin.</p>
           </div>
           
           <div className="mt-8">

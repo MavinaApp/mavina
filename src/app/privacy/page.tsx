@@ -69,7 +69,7 @@ export default function PrivacyPolicyPage() {
             
             <h2 className="text-2xl font-semibold text-blue-800 mt-8 mb-4">10. İletişim</h2>
             <p className="text-black">Herhangi bir soru, öneri veya talebiniz için bizimle iletişime geçebilirsiniz:</p>
-            <p className="text-black"><strong>E-posta:</strong> <a href="mailto:destek@mavina.com" className="text-blue-600 hover:text-blue-500">destek@mavina.com</a></p>
+            <p className="text-black"><strong>E-posta:</strong> <a href="mailto:destek@mavina.tr" className="text-blue-600 hover:text-blue-500">destek@mavina.tr</a></p>
             
             <p className="mt-6 text-black">Bu Gizlilik Politikası, 15 Mart 2024 itibarıyla geçerlidir.</p>
           </div>

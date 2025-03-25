@@ -29,26 +29,20 @@ const DEMO_USERS: User[] = [
     role: "PROVIDER",
     phone: "555-987-6543",
     address: "İstanbul, Türkiye"
+  },
+  {
+    id: "3",
+    name: "Yeni Hizmet Sağlayıcı",
+    email: "yeni@provider.com",
+    role: "PROVIDER",
+    phone: "555-111-2222",
+    address: "Ankara, Türkiye"
   }
 ];
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Sayfa yüklendiğinde localStorage'dan kullanıcı bilgisini al
-    const storedUser = localStorage.getItem("mavinaUser");
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (error) {
-        console.error("Kullanıcı bilgisi ayrıştırılamadı:", error);
-        localStorage.removeItem("mavinaUser");
-      }
-    }
-    setIsLoading(false);
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);

@@ -191,7 +191,7 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row justify-center gap-6 max-w-2xl mx-auto">
               <div className="bg-blue-700 p-6 rounded-xl">
                 <h3 className="text-xl font-bold mb-2">E-posta</h3>
-                <p>destek@mavina.com</p>
+                <p>destek@mavina.tr</p>
               </div>
               <div className="bg-blue-700 p-6 rounded-xl">
                 <h3 className="text-xl font-bold mb-2">Web Sitesi</h3>

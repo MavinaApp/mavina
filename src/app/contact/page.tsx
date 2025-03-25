@@ -135,15 +135,15 @@ export default function ContactPage() {
                 <ul className="space-y-3">
                   <li className="flex items-center">
                     <span className="font-semibold mr-2">💼 Genel İletişim:</span>
-                    <a href="mailto:info@mavina.com" className="text-blue-600 hover:underline">info@mavina.com</a>
+                    <a href="mailto:info@mavina.tr" className="text-blue-600 hover:underline">info@mavina.tr</a>
                   </li>
                   <li className="flex items-center">
                     <span className="font-semibold mr-2">🛠️ Teknik Destek:</span>
-                    <a href="mailto:destek@mavina.com" className="text-blue-600 hover:underline">destek@mavina.com</a>
+                    <a href="mailto:destek@mavina.tr" className="text-blue-600 hover:underline">destek@mavina.tr</a>
                   </li>
                   <li className="flex items-center">
                     <span className="font-semibold mr-2">🤝 İş Ortaklıkları:</span>
-                    <a href="mailto:ortaklik@mavina.com" className="text-blue-600 hover:underline">ortaklik@mavina.com</a>
+                    <a href="mailto:ortaklik@mavina.tr" className="text-blue-600 hover:underline">ortaklik@mavina.tr</a>
                   </li>
                 </ul>
               </ContactCard>

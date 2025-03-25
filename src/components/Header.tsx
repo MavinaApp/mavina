@@ -4,7 +4,8 @@ import Link from "next/link";
 import { FaUser, FaSignOutAlt, FaCog, FaQuestionCircle, FaTag, FaStore } from "react-icons/fa";
 import { useAuth } from "@/lib/auth-context";
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 interface HeaderProps {
   isLoggedIn?: boolean;
@@ -16,25 +17,18 @@ export default function Header({ isLoggedIn: propIsLoggedIn, userRole: propUserR
   const [showUserMenu, setShowUserMenu] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
   
-  // Context'ten gelen kullanıcı bilgisini kullan, yoksa prop'ları kullan
   const isLoggedIn = user ? true : propIsLoggedIn;
   const userRole = user?.role || propUserRole;
   
   const handleLogout = () => {
     console.log("Çıkış yapılıyor...");
     logout();
-    // Yönlendirme işlemi logout fonksiyonu içinde yapılıyor
     setShowUserMenu(false);
   };
   
-  // Hesap ayarlarına git
-  const goToAccountSettings = () => {
-    router.push("/profile");
-    setShowUserMenu(false);
-  };
-  
-  // Kullanıcı menüsünü dışarı tıklandığında kapatmak için
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
@@ -59,12 +53,25 @@ export default function Header({ isLoggedIn: propIsLoggedIn, userRole: propUserR
             </Link>
           </div>
           
+          {isHomePage && (
+            <div className="hidden md:flex items-center space-x-8">
+              <motion.div whileHover={{ y: -2 }}>
+                <Link href="#features" className="text-white hover:text-blue-200">Özellikler</Link>
+              </motion.div>
+              <motion.div whileHover={{ y: -2 }}>
+                <Link href="#how-it-works" className="text-white hover:text-blue-200">Nasıl Çalışır</Link>
+              </motion.div>
+              <motion.div whileHover={{ y: -2 }}>
+                <Link href="#testimonials" className="text-white hover:text-blue-200">Yorumlar</Link>
+              </motion.div>
+            </div>
+          )}
+          
           <div className="flex items-center space-x-4">
             {isLoggedIn ? (
               <>
                 <span className="text-white">Merhaba, {user?.name || "Kullanıcı"}</span>
                 
-                {/* Kullanıcı menüsü */}
                 <div className="relative" ref={userMenuRef}>
                   <button 
                     className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors"
@@ -76,7 +83,6 @@ export default function Header({ isLoggedIn: propIsLoggedIn, userRole: propUserR
                   
                   {showUserMenu && (
                     <div className="absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200 animate-fadeIn">
-                      {/* Kullanıcı bilgileri */}
                       <div className="px-4 py-3 border-b border-gray-100">
                         <div className="flex items-center">
                           <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
@@ -89,7 +95,6 @@ export default function Header({ isLoggedIn: propIsLoggedIn, userRole: propUserR
                         </div>
                       </div>
                       
-                      {/* Hızlı erişim butonları */}
                       <div className="grid grid-cols-2 gap-1 p-2 border-b border-gray-100">
                         <button 
                           className="flex items-center justify-center space-x-1 p-2 rounded-md hover:bg-gray-100 text-blue-600"
@@ -108,7 +113,6 @@ export default function Header({ isLoggedIn: propIsLoggedIn, userRole: propUserR
                         </button>
                       </div>
                       
-                      {/* Menü öğeleri */}
                       <div className="py-1">
                         <button 
                           className="px-4 py-2 text-sm text-blue-600 hover:bg-gray-100 w-full text-left flex items-center"
@@ -159,6 +163,7 @@ export default function Header({ isLoggedIn: propIsLoggedIn, userRole: propUserR
           </div>
         </div>
       </div>
+
       <div className="bg-white shadow-sm py-2">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
@@ -170,7 +175,6 @@ export default function Header({ isLoggedIn: propIsLoggedIn, userRole: propUserR
         </div>
       </div>
       
-      {/* Animasyon için CSS */}
       <style jsx global>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(-10px); }

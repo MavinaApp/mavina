@@ -88,7 +88,7 @@ export default function CookiesPage() {
               Çerez politikamız hakkında herhangi bir sorunuz varsa, lütfen bizimle iletişime geçin:
             </p>
             <p className="mb-4">
-              <strong>E-posta:</strong> info@mavina.com<br />
+              <strong>E-posta:</strong> info@mavina.tr<br />
               <strong>Telefon:</strong> +90 212 123 45 67
             </p>
 
